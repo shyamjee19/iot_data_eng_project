@@ -1,0 +1,25 @@
+# Python virtual environments
+venv/
+airflow-env/
+.env
+
+# Python caches and compiles
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Database / local data volumes
+data/
+postgres_data/
+
+# IDE files
+.idea/
+.vscode/
+
+# System and logs
+*.log
+logs/
+.DS_Store

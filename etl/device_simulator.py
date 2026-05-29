@@ -1,3 +1,5 @@
+import sys
+import os
 import random
 import time
 import json
@@ -5,9 +7,14 @@ from datetime import datetime
 
 import paho.mqtt.client as mqtt
 
+# Add project root directory to path to enable settings import
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from configs import settings
+
 client = mqtt.Client()
 
-client.connect("localhost", 1883, 60)
+print(f"Connecting to MQTT Broker at {settings.MQTT_BROKER}:{settings.MQTT_PORT}...")
+client.connect(settings.MQTT_BROKER, settings.MQTT_PORT, 60)
 
 
 devices = [
@@ -27,10 +34,10 @@ while True:
     }
 
     client.publish(
-        "iot/telemetry",
+        settings.MQTT_TOPIC,
         json.dumps(data)
     )
 
-    print(data)
+    print("Published:", data)
 
     time.sleep(2)

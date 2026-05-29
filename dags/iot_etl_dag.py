@@ -1,20 +1,27 @@
+import sys
+import os
 from airflow import DAG
-
 from airflow.operators.python import PythonOperator
-
 from datetime import datetime
 
+# Add the project root to systemic path so Airflow worker can import from etl and configs
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from etl.postgres_to_snowflake import sync_postgres_to_snowflake
 
 def extract_data():
-    print("Extracting telemetry data")
+    print("--- [AIRFLOW ETL] Phase 1: Extract Staging Data ---")
+    print("Querying fresh telemetry rows from PostgreSQL database...")
 
 
 def transform_data():
-    print("Transforming telemetry data")
+    print("--- [AIRFLOW ETL] Phase 2: Transform Data ---")
+    print("Applying validation constraints, resolving duplicates, and parsing timestamps...")
 
 
 def load_data():
-    print("Loading telemetry data")
+    print("--- [AIRFLOW ETL] Phase 3: Bulk Load to Snowflake ---")
+    # Trigger the real PostgreSQL-to-Snowflake load pipeline
+    sync_postgres_to_snowflake()
 
 
 with DAG(

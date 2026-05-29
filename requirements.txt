@@ -1,0 +1,13 @@
+# IoT Data Engineering Pipeline - Requirements Manifest
+
+# Real-time message streaming & brokers
+paho-mqtt>=1.6.1
+kafka-python>=2.0.2
+
+# Database connectivity
+psycopg2-binary>=2.9.6
+snowflake-connector-python>=3.0.4
+
+# Processing, Streaming & Orchestration
+pyspark>=3.5.1
+apache-airflow>=2.6.0
